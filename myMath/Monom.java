@@ -1,5 +1,5 @@
 
-package myMath;
+package Ex1;
 
 import java.util.Comparator;
 
@@ -185,24 +185,55 @@ public class Monom implements function {
 	}
 
 	public boolean equals(Object m1) {
-		boolean ans = false;
-		if(m1!=null && m1 instanceof Monom) {
-			Monom m = (Monom)m1;
-			if(this.isZero() && m.isZero()) {ans = true;}
-			else {
-				double dc = m.get_coefficient() - this.get_coefficient();
-				if(m.get_power() == this.get_power() && Math.abs(dc)<EPSILON) {
-					ans = true;
-				}
-			}
-		}
-		else {
-			if(m1!=null && m1 instanceof function) {
-				ans = m1.equals(this);
-			}
-		}
-		return ans;
+		if(!(m1 instanceof function)||m1==null)
+			return false;
+		int c=0;
 
+		if(m1 instanceof Monom)
+		{
+			Monom m = (Monom)m1;
+		
+			for(int i=-100;i<=100;i++)
+			{
+				if(Math.abs(this.f(i)-m.f(i))>EPSILON)
+				{
+					return false;
+				}
+				c++;
+			}
+		}
+		if(m1 instanceof Polynom)
+		{
+			Polynom p = (Polynom)m1;
+			for(int i=-100;i<=100;i++)
+			{
+				if(Math.abs(this.f(i)-p.f(i))>EPSILON)
+				{
+					return false;
+				}
+				c++;
+			}
+		}
+		
+		if(m1 instanceof ComplexFunction)
+		{
+			ComplexFunction co=(ComplexFunction) m1;
+			for(int i=-100;i<=100;i++)
+			{
+				if(Math.abs(this.f(i)-co.f(i))>EPSILON)
+				{
+					return false;
+				}
+				c++;
+			}
+			
+		}
+			if(c==201)
+				return true;
+			else
+				return false;
+
+	
 	}
 
 	public void Zero() {
@@ -220,9 +251,12 @@ public class Monom implements function {
 	
 	
 	public function initFromString(String s) {
-		return null;
+		Monom m = new Monom(s);
+		return (Monom)m;
 		
 	}
+	
+
 	
 	
 	

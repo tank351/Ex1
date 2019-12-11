@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 
 
 import java.util.Iterator; 
@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-import myMath.Monom;
+import Ex1.Monom;
 
 /**
  * This class represents a Polynom with add, multiply functionality, it also
@@ -42,14 +42,18 @@ public class Polynom implements Polynom_able {
 	 *            is a string represents a Polynom
 	 */
 	public Polynom(String s) {
+		s=s.replaceAll("\\s+","");
+		if(s.charAt(0)=='+')
+			s=s.substring(1,s.length());
 		String[] terms = s.split("\\+");
 		Polynom p1= new Polynom();
+		
 		for(int i=0;i<terms.length;i++)
 		{
 			if(terms[i].contains("-"))
 			{
 				String t= terms[i];
-				if(!(t.substring(0,1)=="-"))
+				if(t.charAt(0)!='-')
 				{
 					String [] terms2=terms[i].split("\\-");
 					Monom m1=new Monom(terms2[0]);
@@ -66,15 +70,19 @@ public class Polynom implements Polynom_able {
 				}
 				else
 				{
+				
 				String [] terms2=terms[i].split("\\-");
 				for(int j=1;j<terms2.length;j++)
 				{
+					Monom m2=new Monom("-"+terms2[j]);
+					p1.add(m2);
 					
-                      Monom m2=new Monom("-"+terms2[j]);
-                      p1.add(m2);
-
-						
+					
+					
 				}
+				
+					
+				
 				
 				}
 				
@@ -196,35 +204,56 @@ public class Polynom implements Polynom_able {
 	}
 
 	@Override
-	 	public boolean equals (Object p1) {
+	 	public boolean equals (Object m1) {
 
 		
-	boolean t= false;
-	int c=0;
+		if(!(m1 instanceof function)||m1==null)
+			return false;
+		int c=0;
+
+		if(m1 instanceof Monom)
+		{
+			Monom m = (Monom)m1;
 		
-		if (p1 != null && p1 instanceof Polynom) {
-			Polynom p =(Polynom) p1;
-			for(int i=-100;i<100;i++)
+			for(int i=-100;i<=100;i++)
 			{
-				if(p.isZero()&&this.isZero())
-					t= true;
-				else
-					
-				if(Math.abs(p.f(i)-this.f(i))>EPSILON)
+				if(Math.abs(this.f(i)-m.f(i))>EPSILON)
 				{
-					t= false;
-					
+					return false;
 				}
 				c++;
 			}
-			if(c==200)
-				t=true;
 		}
-		else
-			if(p1!=null&& p1 instanceof function)
-				t= p1.equals(this);
+		if(m1 instanceof Polynom)
+		{
+			Polynom p = (Polynom)m1;
+			for(int i=-100;i<=100;i++)
+			{
+				if(Math.abs(this.f(i)-p.f(i))>EPSILON)
+				{
+					return false;
+				}
+				c++;
+			}
+		}
 		
-		return t;
+		if(m1 instanceof ComplexFunction)
+		{
+			ComplexFunction co=(ComplexFunction) m1;
+			for(int i=-100;i<=100;i++)
+			{
+				if(Math.abs(this.f(i)-co.f(i))>EPSILON)
+				{
+					return false;
+				}
+				c++;
+			}
+			
+		}
+			if(c==201)
+				return true;
+			else
+				return false;
 		}
 
 			
@@ -376,7 +405,12 @@ public class Polynom implements Polynom_able {
 
 			}
 
-			else res+="+"+m.toString();
+			else {
+				if(m.get_coefficient()<0)
+				res+=m.toString();
+				else
+					res+="+"+m.toString();
+			}
 
 		}
 
@@ -384,6 +418,7 @@ public class Polynom implements Polynom_able {
 	}
 	public function initFromString(String s)
 	{
-		
+		Polynom p= new Polynom(s);
+		return (Polynom)p;
 	}
 	}

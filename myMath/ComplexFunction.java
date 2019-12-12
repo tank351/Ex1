@@ -1,6 +1,8 @@
 package Ex1;
 
 import java.util.Arrays;
+
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,42 +50,42 @@ public class ComplexFunction implements complex_function {
 		case "plus":
 		{
 			this.left=f;
-		    this.right=right;
+		    this.right=r;
 		    this.op=Operation.Plus;
 		    break;
 		}
 		case "mul":
 		{
 			this.left=f;
-		    this.right=right;
+		    this.right=r;
 		    this.op=Operation.Times;
 		    break;
 		}
 		case "div":
 		{
 			this.left=f;
-		    this.right=right;
+		    this.right=r;;
 		    this.op=Operation.Divid;
 		    break;
 		}
 		case "max":
 		{
 			this.left=f;
-		    this.right=right;
+		    this.right=r;
 		    this.op=Operation.Max;
 		    break;
 		}
 		case "min":
 		{
 			this.left=f;
-		    this.right=right;
+		    this.right=r;
 		    this.op=Operation.Min;
 		    break;
 		}
 		case "comp":
 		{
 			this.left=f;
-		    this.right=right;
+		    this.right=r;
 		    this.op=Operation.Comp;
 		    break;
 		}

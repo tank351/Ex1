@@ -1,6 +1,10 @@
 package Ex1;
 
+
+import static org.junit.Assert.fail;
+
 import java.util.Iterator;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,8 +40,8 @@ class Functions_GUITest {
 	//	Range rx = new Range(-10,10);
 	//	Range ry = new Range(-5,15);
 //		data.drawFunctions(w,h,rx,ry,res);
-		String file = "function_file.txt";
-		String file2 = "function_file2.txt";
+		String file = "draw.txt";
+		String file2 = "draw2.txt";
 		try {
 			data.saveToFile(file);
 			Functions_GUI data2 = new Functions_GUI();
@@ -50,42 +54,8 @@ class Functions_GUITest {
 		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
-//	@BeforeAll
-//	static void setUpBeforeClass() throws Exception {
-//	}
 
-	@BeforeEach
-	void setUp() throws Exception {
-		_data = FunctionsFactory();
-	}
 
-	//@Test
-	void testFunctions_GUI() {
-	//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testInitFromFile() {
-	//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testSaveToFile() {
-		
-		
-	}
-
-	//@Test
-	void testDrawFunctions() {
-		//_data.drawFunctions();
-	//	fail("Not yet implemented");
-	}
-
-	@Test
-	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions("GUI_params.txt");
-		//fail("Not yet implemented");
-	}
 	public static functions FunctionsFactory() {
 		functions ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";

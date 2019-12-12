@@ -60,7 +60,7 @@ public class ComplexFunctiontest {
 	@Test
 
 	 public void testComplexFunctiontoString() {
-	       String s="plus(mul(2x^2+3x+2,x),2)";
+	       String s="plus(mul(2.0x^2+3.0x+2.0,x),2.0)";
 	       
 	       ComplexFunction c3=new ComplexFunction();
 	       c3=(ComplexFunction)c3.initFromString("plus(mul(2x^2+3x+2,x),2)");

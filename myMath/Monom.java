@@ -105,6 +105,9 @@ public class Monom implements function {
 		String ans = "";
 		if(isZero()) ans ="";
 		else {
+			if(this._coefficient==1&&this._power>0)
+				ans="";
+			else
 			
 			ans = ""+this.get_coefficient();
 			if(this.get_power()>0) {
@@ -114,8 +117,8 @@ public class Monom implements function {
 				}
 			}
 		}
-		ans=ans.replaceAll(".0", "");
-		ans=ans.replaceAll("1x", "x");
+
+		
 		return ans;
 	}
 	// you may (always) add other methods.

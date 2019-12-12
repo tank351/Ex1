@@ -52,16 +52,19 @@ int c=0;
 
 			while ((line = br.readLine()) != null) {
 			line=line.replaceAll(" ", "");
-				 if(line.length() >0&&line!="\r\n"&&line!="\n") 
+				 if(line.length() >0&&!line.trim().isEmpty()&&line!="\r\n"&&line!="\n") 
 				 { 
    
 					
 			ComplexFunction co= new ComplexFunction();
 			co=(ComplexFunction)co.initFromString(line);
+			
 			f.add(co);
+			
 				 
 				 
 				 }
+				
 			}
 			
 			br.close();
@@ -71,7 +74,7 @@ int c=0;
 
 		catch(IOException e){
 
-			e.printStackTrace();
+			
 
 		}
 	}
@@ -199,22 +202,13 @@ int c=0;
 	@Override
 	public boolean addAll(Collection<? extends function> c) {
 		// TODO Auto-generated method stub
-		it = f.iterator();
-		boolean flag = false;
-		while(it.hasNext()&&flag) {
-			function f1 = it.next();
-		flag = add(f1);
-		}
-		return flag;
+		return f.addAll(c);
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		it = f.iterator();
-		while(it.hasNext()) {
-			 it.remove();;
-		}
+		f.clear();
 	}
 
 	@Override
@@ -292,7 +286,7 @@ int c=0;
 	@Override
 	public boolean retainAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return f.retainAll(c);
 	}
 
 	@Override
@@ -317,7 +311,7 @@ int c=0;
 	@Override
 	public <T> T[] toArray(T[] a) {
 		// TODO Auto-generated method stub
-		return null;
+		return f.toArray(a);
 	}
 
 	public Polynom get(int i) {

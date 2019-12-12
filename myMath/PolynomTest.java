@@ -31,13 +31,31 @@ public class PolynomTest {
 	@Test
 
     public void testPolynomString() {
-        String s= "3x^3+2x^2+x+1"; 
+        String s= "3.0x^3+2.0x^2+x+1.0"; 
         Polynom p = new Polynom(s);
         String s1 = p.toString();
 
         Polynom p1 = new Polynom(s1);
 
         if (!p.equals(p1)) {
+
+            fail("ERR - related to the Polynom(String) init: the polynoms should be the same (equals)");
+
+        }
+	}
+	
+	
+	
+	@Test
+
+    public void testPolynomtoString() {
+        String s= "3.0x^3+2.0x^2+x+1.0"; 
+        Polynom p = new Polynom(s);
+        String s1 = p.toString();
+
+        Polynom p1 = new Polynom(s1);
+
+        if (!s1.equals(s)) {
 
             fail("ERR - related to the Polynom(String) init: the polynoms should be the same (equals)");
 

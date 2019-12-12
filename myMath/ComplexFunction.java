@@ -20,13 +20,91 @@ public class ComplexFunction implements complex_function {
 	function right;
 
 	public ComplexFunction(Operation op, function left , function right) {
+		if(op==null)
+			throw new RuntimeException("operation cant be null");
 	
 		this.op=op;
+		
 		
 		
 		this.left=left;
 		this.right=right;
 		
+		
+	}
+	
+	public ComplexFunction(function f)
+	{
+		this.op=Operation.None;
+		this.left=f.copy();
+		this.right=null;
+	}
+	
+	public ComplexFunction(String s,function f,function r)
+	{
+		s=s.toLowerCase();
+		switch(s)
+		{
+		case "plus":
+		{
+			this.left=f;
+		    this.right=right;
+		    this.op=Operation.Plus;
+		    break;
+		}
+		case "mul":
+		{
+			this.left=f;
+		    this.right=right;
+		    this.op=Operation.Times;
+		    break;
+		}
+		case "div":
+		{
+			this.left=f;
+		    this.right=right;
+		    this.op=Operation.Divid;
+		    break;
+		}
+		case "max":
+		{
+			this.left=f;
+		    this.right=right;
+		    this.op=Operation.Max;
+		    break;
+		}
+		case "min":
+		{
+			this.left=f;
+		    this.right=right;
+		    this.op=Operation.Min;
+		    break;
+		}
+		case "comp":
+		{
+			this.left=f;
+		    this.right=right;
+		    this.op=Operation.Comp;
+		    break;
+		}
+		case "none":
+		{
+			this.left=f;
+		    this.right=null;
+		    this.op=Operation.None;
+		    break;
+		}
+		case"error":
+		{
+			throw new RuntimeException("error");
+		}
+		default:{
+			throw new RuntimeException("invalid input");
+
+			
+		}
+			
+		}
 		
 	}
 
@@ -38,7 +116,7 @@ public class ComplexFunction implements complex_function {
 		
 		this.left=null;
 		this.right=null;
-		this.op=null;
+		this.op=Operation.None;
 	}
 	
 	//10+x
@@ -46,6 +124,7 @@ public class ComplexFunction implements complex_function {
 	
 	public function initFromString(String s) {
 		s=s.toLowerCase();
+		
 		int i=s.indexOf("plus(");
 		
 		int i1=s.indexOf("div(");
@@ -56,20 +135,21 @@ public class ComplexFunction implements complex_function {
 
 		int i4=s.indexOf("min(");
 		int i5=s.indexOf("comp(");
+		int i6=s.indexOf("none(");
 		ComplexFunction co=new ComplexFunction();
 		//10+x
-		if(i!=0&&i1!=0&&i2!=0&&i3!=0&&i4!=0&&i5!=0)
+		if((i!=0&&i1!=0&&i2!=0&&i3!=0&&i4!=0&&i5!=0)||i6==0)
 		{
 			if(s.contains(","))
 			{int j=s.indexOf(",");
 				Polynom p=new Polynom(s.substring(0,j));
 			
-				return new ComplexFunction(null,p,null);
+				return new ComplexFunction(Operation.None,p,null);
 			}
 			else
 			{
 			Polynom p = new Polynom(s);
-			Operation p1=null;
+			
 			return new ComplexFunction(Operation.None,p,null);
 			}
 		}
@@ -79,7 +159,7 @@ public class ComplexFunction implements complex_function {
 			int j=s.indexOf("(");
 			Polynom p=new Polynom(s.substring(j+1,s.length()-1));
 			
-			return new ComplexFunction(null,p,null);
+			return new ComplexFunction(Operation.None,p,null);
 		}
 			
 			if(i==0)
@@ -109,7 +189,7 @@ public class ComplexFunction implements complex_function {
 			}
 			if(i4==0)
 			{
-				String k=shelp(s);
+				String k=shelp(s.substring(4));
 				co=new ComplexFunction(Operation.Min,initFromString(k),initFromString(s.substring(k.length()+1+4,s.length()-1)));
 				
 			}
@@ -121,8 +201,9 @@ public class ComplexFunction implements complex_function {
 			}
 			
 			return co;
-				
 		}
+		
+
 		
 		
 		
@@ -131,14 +212,7 @@ public class ComplexFunction implements complex_function {
 		
 		
 
-		/*catch(Exception e)
-		{
-				throw new RuntimeException("invalid input");
-		}*/
 		
-
-
-
 
 		
 		
@@ -172,6 +246,8 @@ public class ComplexFunction implements complex_function {
 		
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-m.f(i))>EPSILON)
 				{
 					return false;
@@ -184,6 +260,8 @@ public class ComplexFunction implements complex_function {
 			Polynom p = (Polynom)m1;
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-p.f(i))>EPSILON)
 				{
 					return false;
@@ -197,6 +275,8 @@ public class ComplexFunction implements complex_function {
 			ComplexFunction co=(ComplexFunction) m1;
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-co.f(i))>EPSILON)
 				{
 					return false;
@@ -205,7 +285,7 @@ public class ComplexFunction implements complex_function {
 			}
 			
 		}
-			if(c==201)
+			if(c==200)
 				return true;
 			else
 				return false;
@@ -457,6 +537,7 @@ public class ComplexFunction implements complex_function {
 		String s=toString(this);
 		s=s.replaceAll("Times", "mul");
 		s=s.replaceAll("Divid", "div");
+		s=s.toLowerCase();
 		return s;
 	}
 		
@@ -468,7 +549,7 @@ public String toString(ComplexFunction co) {
     	
     }
     
-    if((this.op==Operation.None||this.right==null)&&this.left!=null)
+    if((this.op==null||this.op==Operation.None||this.right==null)&&this.left!=null)
     	return(this.left.toString());
     if (!(this.left instanceof ComplexFunction)&&!(this.right instanceof ComplexFunction))
     		return(this.op+"("+this.left.toString()+","+this.right.toString()+")");
@@ -496,7 +577,6 @@ public String toString(ComplexFunction co) {
         
 	}
 
-//1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0)
 
 private static String shelp(String s) {
 int c=1;
@@ -513,6 +593,8 @@ int i3=s.indexOf("max(");
 
 int i4=s.indexOf("min(");
 int i5=s.indexOf("comp(");
+
+
 if(i!=0&&i1!=0&&i2!=0&&i3!=0&&i4!=0&&i5!=0)
 {
 	if(s.contains(","))

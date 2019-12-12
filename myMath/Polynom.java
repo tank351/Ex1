@@ -216,7 +216,10 @@ public class Polynom implements Polynom_able {
 			Monom m = (Monom)m1;
 		
 			for(int i=-100;i<=100;i++)
+				
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-m.f(i))>EPSILON)
 				{
 					return false;
@@ -229,6 +232,8 @@ public class Polynom implements Polynom_able {
 			Polynom p = (Polynom)m1;
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-p.f(i))>EPSILON)
 				{
 					return false;
@@ -242,6 +247,8 @@ public class Polynom implements Polynom_able {
 			ComplexFunction co=(ComplexFunction) m1;
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-co.f(i))>EPSILON)
 				{
 					return false;
@@ -250,7 +257,7 @@ public class Polynom implements Polynom_able {
 			}
 			
 		}
-			if(c==201)
+			if(c==200)
 				return true;
 			else
 				return false;

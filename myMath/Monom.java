@@ -103,8 +103,9 @@ public class Monom implements function {
 
 	public String toString() {
 		String ans = "";
-		if(isZero()) ans ="0";
+		if(isZero()) ans ="";
 		else {
+			
 			ans = ""+this.get_coefficient();
 			if(this.get_power()>0) {
 				ans += "x";
@@ -113,6 +114,8 @@ public class Monom implements function {
 				}
 			}
 		}
+		ans=ans.replaceAll(".0", "");
+		ans=ans.replaceAll("1x", "x");
 		return ans;
 	}
 	// you may (always) add other methods.
@@ -195,6 +198,8 @@ public class Monom implements function {
 		
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-m.f(i))>EPSILON)
 				{
 					return false;
@@ -207,6 +212,9 @@ public class Monom implements function {
 			Polynom p = (Polynom)m1;
 			for(int i=-100;i<=100;i++)
 			{
+				
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-p.f(i))>EPSILON)
 				{
 					return false;
@@ -220,6 +228,8 @@ public class Monom implements function {
 			ComplexFunction co=(ComplexFunction) m1;
 			for(int i=-100;i<=100;i++)
 			{
+				if(i==0)
+					i++;
 				if(Math.abs(this.f(i)-co.f(i))>EPSILON)
 				{
 					return false;
@@ -228,7 +238,7 @@ public class Monom implements function {
 			}
 			
 		}
-			if(c==201)
+			if(c==200)
 				return true;
 			else
 				return false;

@@ -1,4 +1,4 @@
-package Ex1;
+package Ex1Testing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,6 +7,9 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import Ex1.Monom;
+import Ex1.Polynom;
 
 public class PolynomTest {
 	public final static double EPS = 0.00001;

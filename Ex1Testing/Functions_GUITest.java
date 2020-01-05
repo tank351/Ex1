@@ -1,13 +1,10 @@
-package Ex1;
+package Ex1Testing;
 
 
 import static org.junit.Assert.fail;
 
 import java.util.Iterator;
 
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import Ex1.ComplexFunction;
 import Ex1.Functions_GUI;

@@ -1,9 +1,13 @@
-package Ex1;
+package Ex1Testing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import Ex1.ComplexFunction;
+import Ex1.Operation;
+import Ex1.Polynom;
 
 public class ComplexFunctiontest {
 	
@@ -20,19 +24,10 @@ public class ComplexFunctiontest {
        ComplexFunction c1=new ComplexFunction(Operation.Plus,p1,p);
 
        if(!c1.equals(c))
-    	   
-
-       
-  
-
- 
-
-            fail("ERR - problem with equals method the ComplexFunctions should be the same (equals)");
+         fail("ERR - problem with equals method the ComplexFunctions should be the same (equals)");
 
         }
 
-	
-	
 	@Test
 
     public void testComplexFunctioninit() {
@@ -46,13 +41,6 @@ public class ComplexFunctiontest {
        ComplexFunction c3=new ComplexFunction();
        c3=(ComplexFunction)c3.initFromString("plus(mul(2x^2+3x+2,x),2)");
        if(!c3.equals(c2))
-    	   
-
-       
-  
-
- 
-
             fail("ERR - problem with init method the ComplexFunctions should be the same (equals)");
 
         }
@@ -66,37 +54,24 @@ public class ComplexFunctiontest {
 	       c3=(ComplexFunction)c3.initFromString("plus(mul(2x^2+3x+2,x),2)");
 	       if(!s.equals(c3.toString()))
 	    	   
-
-	       
-	  
-
-	 
-
-	            fail("ERR - problem with tostring method the strings should be the same (equals)");
+      fail("ERR - problem with tostring method the strings should be the same (equals)");
 
 	        }
 	 
 	 @Test
 	 public void testComplexFunctionf() {
 	       double i=12;
-	       double i2=5;
-	       
-	       
+	       double i2=5;	       
 	       ComplexFunction c3=new ComplexFunction();
 	       ComplexFunction c2=new ComplexFunction();
 	       c3=(ComplexFunction)c2.initFromString("plus(div(2x,x),3)");
-
-	       
 	       c2=(ComplexFunction)c3.initFromString("mul(2x,3)");
 	      double j=c3.f(2);
 	      double j2=c2.f(2);
 	      assertEquals(i2, j,EPSILON);
 	      assertEquals(i, j2,EPSILON);
 
-
-	       
-	  
-	        }
+    }
 	 
 	 @Test
 	 public void testComplexFunctioncopy() {
@@ -105,13 +80,7 @@ public class ComplexFunctiontest {
 	    ComplexFunction f1=(ComplexFunction)f.copy();
 	     if(!f.equals(f1))
 	            fail("ERR - problem with copy method the ComplexFunctions should be the same (equals)");
-
-	    	 
-
-
-	       
-	  
-	        }
+   }
 	 
 		@Test
 		
@@ -167,14 +136,8 @@ public class ComplexFunctiontest {
 		    if(!f3.equals(f))
 	            fail("ERR - problem with div method the ComplexFunctions should be the same (equals)");
 
-		    	 
-
-
-		       
-		  
 		        }
 		
-
 		@Test
 		public void testComplexFunctionmin() {
 		    ComplexFunction f= new ComplexFunction();
@@ -186,16 +149,9 @@ public class ComplexFunctiontest {
 		    f.min(f2);
 		    if(!f3.equals(f))
 	            fail("ERR - problem with min method the ComplexFunctions should be the same (equals)");
-
-		    	 
-
-
-		       
-		  
 		        }
 		
 		
-
 		@Test
 		public void testComplexFunctionmax() {
 		    ComplexFunction f= new ComplexFunction();
@@ -207,16 +163,10 @@ public class ComplexFunctiontest {
 		    f.max(f2);
 		    if(!f3.equals(f))
 	            fail("ERR - problem with max method the ComplexFunctions should be the same (equals)");
-
-		    	 
-
-
-		       
+       
 		  
 		        }
 		
-		
-
 		@Test
 		public void testComplexFunctioncomp() {
 		    ComplexFunction f= new ComplexFunction();
@@ -228,28 +178,8 @@ public class ComplexFunctiontest {
 		    f.comp(f2);
 		    if(!f3.equals(f))
 	            fail("ERR - problem with comp method the ComplexFunctions should be the same (equals)");
-
-		    	 
-
-
-		       
+	       
 		  
 		        }
-	
-	
-	
-	
-	
 		
-
-	 
-	 
-	 
-	 
-	 
-	 
-
     }
-	
-
-
